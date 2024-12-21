@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +6,24 @@
     <title>Template Collector | Blings</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            background-color: #1B1B1B;
+            color: #FCFCFC;
+        }
+        .button-gradient {
+            background: linear-gradient(90deg, #DA458F 0%, #DA458F 100%);
+        }
+        .input-dark {
+            background: #2D2D2D;
+            border: 1px solid #3D3D3D;
+        }
+    </style>
 </head>
-<body class="bg-[#1B1B1B] min-h-screen">
-    <div class="max-w-4xl mx-auto p-6">
+<body>
+    <div class="max-w-md mx-auto py-12 px-4">
         <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-[#FCFCFC] mb-4">
+            <h1 class="text-4xl font-bold mb-4">
                 Template Collector
                 <span class="block text-[#DA458F]">by Blings</span>
             </h1>
@@ -20,38 +32,38 @@
         <div class="bg-[#2D2D2D] rounded-lg p-8">
             <form id="templateForm" class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Company Name</label>
+                    <label class="block text-sm font-medium mb-2">Company Name</label>
                     <input 
                         type="text" 
                         name="companyName" 
                         required
-                        class="w-full p-2 bg-[#3D3D3D] border border-gray-700 rounded text-[#FCFCFC]"
+                        class="w-full p-3 rounded-lg input-dark focus:outline-none focus:ring-2 focus:ring-[#DA458F]"
                     >
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">HubSpot API Key</label>
+                    <label class="block text-sm font-medium mb-2">HubSpot API Key</label>
                     <input 
                         type="password" 
                         name="apiKey" 
                         required
-                        class="w-full p-2 bg-[#3D3D3D] border border-gray-700 rounded text-[#FCFCFC]"
+                        class="w-full p-3 rounded-lg input-dark focus:outline-none focus:ring-2 focus:ring-[#DA458F]"
                     >
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                    <label class="block text-sm font-medium mb-2">Email Address</label>
                     <input 
                         type="email" 
                         name="email" 
                         required
-                        class="w-full p-2 bg-[#3D3D3D] border border-gray-700 rounded text-[#FCFCFC]"
+                        class="w-full p-3 rounded-lg input-dark focus:outline-none focus:ring-2 focus:ring-[#DA458F]"
                     >
                 </div>
 
                 <button 
                     type="submit"
-                    class="w-full bg-[#DA458F] text-white py-2 px-4 rounded hover:bg-opacity-90 transition-colors"
+                    class="w-full button-gradient text-white py-3 px-4 rounded-lg hover:opacity-90 transition-opacity font-medium"
                 >
                     Share Templates
                 </button>
@@ -116,5 +128,3 @@
     </script>
 </body>
 </html>
-
-```
