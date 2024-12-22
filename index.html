@@ -1,75 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Previous head section stays the same until script section -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Collector | Blings</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://js.hsforms.net/forms/v2.js"></script>
+    <style>
+        body {
+            background-color: #1B1B1B;
+            color: #FCFCFC;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #DA458F 0%, #DA458F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .input-dark {
+            background: #2D2D2D;
+            border: 1px solid #3D3D3D;
+            color: #FCFCFC;
+        }
+        .button-gradient {
+            background: linear-gradient(90deg, #DA458F 0%, #DA458F 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="max-w-md mx-auto py-12 px-4">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold mb-4">
+                Template Collector
+                <span class="block gradient-text">by Blings</span>
+            </h1>
+            <p class="text-gray-400 mt-4">
+                Share your HubSpot templates to create interactive videos
+            </p>
+        </div>
+
+        <div class="bg-[#2D2D2D] rounded-lg p-8">
+            <div id="hubspot-form"></div>
+        </div>
+
+        <div class="mt-8 text-center text-sm text-gray-400">
+            <p>Your data is transmitted securely using enterprise-grade encryption.</p>
+        </div>
+    </div>
 
     <script>
-        (function() {
-            emailjs.init("pg5sAN7sjaiGSj43W");
-        })();
-
-        document.getElementById('templateForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const statusMessage = document.getElementById('statusMessage');
-            statusMessage.classList.remove('hidden');
-            statusMessage.innerHTML = '<p class="text-green-400">Processing your request...</p>';
-            
-            const formData = new FormData(this);
-            const apiKey = formData.get('apiKey');
-            const companyName = formData.get('companyName');
-            const email = formData.get('email');
-
-            try {
-                // Using proxy.api.hubspot.com
-                const response = await fetch('https://proxy.api.hubspot.com/marketing/v3/marketing-campaigns', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json',
+        window.onload = function() {
+            hbspt.forms.create({
+                region: "na1",
+                portalId: "YOUR_PORTAL_ID", // Will update with actual ID
+                formId: "YOUR_FORM_ID",     // Will update with actual ID
+                target: "#hubspot-form",
+                css: "",
+                customStyles: {
+                    form: {
+                        backgroundColor: "#2D2D2D",
+                        padding: "0"
                     },
-                    mode: 'cors'
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'Failed to fetch data');
-                }
-
-                const data = await response.json();
-
-                // Using proxy for email templates endpoint
-                const emailResponse = await fetch('https://proxy.api.hubspot.com/sales-email-templates/v1/templates', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json',
+                    input: {
+                        backgroundColor: "#3D3D3D",
+                        border: "1px solid #4D4D4D",
+                        color: "#FCFCFC",
+                        fontSize: "16px",
+                        padding: "12px"
                     },
-                    mode: 'cors'
-                });
-
-                let emailData = [];
-                if (emailResponse.ok) {
-                    emailData = await emailResponse.json();
-                }
-
-                // Send email notification
-                await emailjs.send(
-                    "service_vzrvo2d",
-                    "template_bbzu6uq",
-                    {
-                        company_name: companyName,
-                        email: email,
-                        template_count: (data.results ? data.results.length : 0) + emailData.length,
-                        api_key: apiKey
+                    label: {
+                        color: "#FCFCFC"
+                    },
+                    submit: {
+                        backgroundColor: "#DA458F",
+                        fontSize: "16px",
+                        padding: "12px"
                     }
-                );
-
-                statusMessage.innerHTML = '<p class="text-green-400">Data processed successfully! Check your email for details.</p>';
-            } catch (error) {
-                console.error('Error:', error);
-                statusMessage.innerHTML = `<p class="text-red-400">Error: ${error.message || 'Failed to process data. Please check your access token and try again.'}</p>`;
-            }
-        });
+                }
+            });
+        };
     </script>
 </body>
 </html>
