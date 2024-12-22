@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template Collector | Blings</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <!-- HubSpot Form Script -->
     <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
     <style>
         body {
@@ -15,6 +14,22 @@
         }
         .gradient-text {
             color: #DA458F;
+        }
+        /* Force form visibility */
+        #hubspotForm {
+            min-height: 400px;
+            position: relative;
+            z-index: 10;
+        }
+        /* Override HubSpot default styles */
+        .hs-form {
+            display: block !important;
+            visibility: visible !important;
+        }
+        .hs-input {
+            background-color: #3D3D3D !important;
+            border: 1px solid #4D4D4D !important;
+            color: #FCFCFC !important;
         }
     </style>
 </head>
@@ -49,11 +64,16 @@
                 portalId: "6465969",
                 formId: "1tnoDFj6ATR2ubPzCAhM9uQ3ul69",
                 target: "#hubspotForm",
-                css: "",
+                onFormReady: function($form) {
+                    // Force form visibility after load
+                    document.querySelector('#hubspotForm').style.opacity = '1';
+                },
                 customStyles: {
                     form: {
                         backgroundColor: "#2D2D2D",
-                        padding: "0"
+                        padding: "0",
+                        display: "block",
+                        visibility: "visible"
                     },
                     input: {
                         backgroundColor: "#3D3D3D",
