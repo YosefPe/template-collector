@@ -13,6 +13,10 @@
         .gradient-text {
             color: #DA458F;
         }
+        .form-container {
+            min-height: 400px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -28,16 +32,13 @@
             </p>
         </div>
 
-        <!-- HubSpot Form - Direct Embed -->
+        <!-- HubSpot Form - iframe -->
         <div class="bg-[#2D2D2D] rounded-lg p-8 mb-8">
-            <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-            <script>
-              hbspt.forms.create({
-                region: "na1",
-                portalId: "6465969",
-                formId: "1tnoDFj6ATR2ubPzCAhM9uQ3ul69"
-              });
-            </script>
+            <iframe 
+                class="form-container"
+                src="https://share.hsforms.com/1tnoDFj6ATR2ubPzCAhM9uQ3ul69"
+                frameborder="0"
+            ></iframe>
         </div>
 
         <!-- Footer -->
