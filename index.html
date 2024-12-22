@@ -1,87 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template Collector | Blings</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <style>
-        body {
-            background-color: #1B1B1B;
-            color: #FCFCFC;
-        }
-        .button-gradient {
-            background: linear-gradient(90deg, #DA458F 0%, #DA458F 100%);
-        }
-        .input-dark {
-            background: #2D2D2D;
-            border: 1px solid #3D3D3D;
-        }
-    </style>
-</head>
-<body>
-    <div class="max-w-md mx-auto py-12 px-4">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold mb-4">
-                Template Collector
-                <span class="block text-[#DA458F]">by Blings</span>
-            </h1>
-            <p class="text-gray-400 mt-2">Share your HubSpot templates to create interactive videos</p>
-        </div>
-
-        <div class="bg-[#2D2D2D] rounded-lg p-8">
-            <form id="templateForm" class="space-y-6">
-                <div>
-                    <label class="block text-sm font-medium mb-2">Company Name</label>
-                    <input 
-                        type="text" 
-                        name="companyName" 
-                        required
-                        class="w-full p-3 rounded-lg input-dark focus:outline-none focus:ring-2 focus:ring-[#DA458F]"
-                    >
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium mb-2">HubSpot Access Token</label>
-                    <input 
-                        type="password" 
-                        name="apiKey" 
-                        required
-                        class="w-full p-3 rounded-lg input-dark focus:outline-none focus:ring-2 focus:ring-[#DA458F]"
-                    >
-                    <p class="mt-1 text-sm text-gray-400">Use your private app access token</p>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium mb-2">Email Address</label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        required
-                        class="w-full p-3 rounded-lg input-dark focus:outline-none focus:ring-2 focus:ring-[#DA458F]"
-                    >
-                </div>
-
-                <button 
-                    type="submit"
-                    class="w-full button-gradient text-white py-3 px-4 rounded-lg hover:opacity-90 transition-opacity font-medium"
-                >
-                    Share Templates
-                </button>
-            </form>
-
-            <div id="statusMessage" class="mt-4 text-center hidden">
-                <p class="text-green-400">Processing...</p>
-            </div>
-        </div>
-
-        <!-- Security Notice -->
-        <div class="mt-8 text-center text-sm text-gray-400">
-            <p>Your access token is only used once and never stored.</p>
-            <p>All data is transmitted securely using enterprise-grade encryption.</p>
-        </div>
-    </div>
+<!-- Previous head section stays the same until script section -->
 
     <script>
         (function() {
@@ -101,13 +20,14 @@
             const email = formData.get('email');
 
             try {
-                // Fetch email data using marketing campaigns endpoint
-                const response = await fetch('https://api.hubapi.com/marketing/v3/marketing-campaigns', {
+                // Using proxy.api.hubspot.com
+                const response = await fetch('https://proxy.api.hubspot.com/marketing/v3/marketing-campaigns', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${apiKey}`,
                         'Content-Type': 'application/json',
-                    }
+                    },
+                    mode: 'cors'
                 });
 
                 if (!response.ok) {
@@ -117,13 +37,14 @@
 
                 const data = await response.json();
 
-                // Try to fetch email templates using sales email endpoint
-                const emailResponse = await fetch('https://api.hubapi.com/sales-email-templates/v1/templates', {
+                // Using proxy for email templates endpoint
+                const emailResponse = await fetch('https://proxy.api.hubspot.com/sales-email-templates/v1/templates', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${apiKey}`,
                         'Content-Type': 'application/json',
-                    }
+                    },
+                    mode: 'cors'
                 });
 
                 let emailData = [];
