@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template Collector | Blings</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- HubSpot Form Script -->
+    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
     <style>
         body {
             background-color: #1B1B1B;
             color: #FCFCFC;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         .gradient-text {
             color: #DA458F;
@@ -32,43 +31,9 @@
             </p>
         </div>
 
-        <!-- Form Section -->
+        <!-- HubSpot Form Container -->
         <div class="bg-[#2D2D2D] rounded-lg p-8 mb-8">
-            <form class="space-y-6">
-                <div>
-                    <label class="block text-sm font-medium mb-2">Company Name</label>
-                    <input 
-                        type="text" 
-                        class="w-full p-3 bg-[#3D3D3D] border border-gray-700 rounded-lg text-white"
-                        required
-                    >
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium mb-2">HubSpot Access Token</label>
-                    <input 
-                        type="password" 
-                        class="w-full p-3 bg-[#3D3D3D] border border-gray-700 rounded-lg text-white"
-                        required
-                    >
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium mb-2">Email Address</label>
-                    <input 
-                        type="email" 
-                        class="w-full p-3 bg-[#3D3D3D] border border-gray-700 rounded-lg text-white"
-                        required
-                    >
-                </div>
-
-                <button 
-                    type="submit"
-                    class="w-full bg-[#DA458F] text-white py-3 px-4 rounded-lg hover:opacity-90 transition-opacity"
-                >
-                    Share Templates
-                </button>
-            </form>
+            <div id="hubspotForm"></div>
         </div>
 
         <!-- Footer -->
@@ -76,5 +41,38 @@
             <p>Your data is transmitted securely using enterprise-grade encryption.</p>
         </div>
     </div>
+
+    <script>
+        window.onload = function() {
+            hbspt.forms.create({
+                region: "na1",
+                portalId: "6465969",
+                formId: "1tnoDFj6ATR2ubPzCAhM9uQ3ul69",
+                target: "#hubspotForm",
+                css: "",
+                customStyles: {
+                    form: {
+                        backgroundColor: "#2D2D2D",
+                        padding: "0"
+                    },
+                    input: {
+                        backgroundColor: "#3D3D3D",
+                        border: "1px solid #4D4D4D",
+                        color: "#FCFCFC",
+                        fontSize: "16px",
+                        padding: "12px"
+                    },
+                    label: {
+                        color: "#FCFCFC"
+                    },
+                    submit: {
+                        backgroundColor: "#DA458F",
+                        fontSize: "16px",
+                        padding: "12px"
+                    }
+                }
+            });
+        };
+    </script>
 </body>
 </html>
